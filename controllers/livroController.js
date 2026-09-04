@@ -34,6 +34,7 @@ function buscarPorId(req, res, next) {
 // =============================================
 function criar(req, res, next) {
   try {
+    
     const dados = req.body;
 
     if (!dados.titulo || !dados.autor || dados.preco === undefined) {
