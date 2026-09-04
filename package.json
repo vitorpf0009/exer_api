@@ -1,0 +1,12 @@
+{
+  "name": "api-livros",
+  "version": "1.0.0",
+  "description": "API REST de cadastro de livros",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
