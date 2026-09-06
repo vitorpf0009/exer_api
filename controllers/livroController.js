@@ -57,7 +57,7 @@ function criar(req, res, next) {
 // =============================================
 function atualizar(req, res, next) {
   try {
-    const id = parseInt(req.body.id);
+    const id = parseInt(req.params.id);
     const dados = req.body;
 
     const livroAtualizado = livroService.atualizar(id, dados);
@@ -80,15 +80,22 @@ function atualizar(req, res, next) {
 // =============================================
 function remover(req, res, next) {
   try {
-    livroDAO.limparTudo();
+     const id = parseInt(req.params.id);
+    const livroRemovido = livroService.remover(id);
+
+   if (!livroRemovido) {
+      return res.status(404).json({ mensagem: "Livro não encontrado." });
+    }
 
     return res.status(200).json({
-      mensagem: "Livros removidos com sucesso.",
+      mensagem: "Livro removido com sucessoa.",
+      livro: livroRemovido
     });
   } catch (erro) {
     return next(erro);
   }
 }
+
 
 // =============================================
 // Buscar resumo de um livro
