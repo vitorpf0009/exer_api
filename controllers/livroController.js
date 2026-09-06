@@ -23,7 +23,7 @@ function buscarPorId(req, res, next) {
     const id = parseInt(req.params.id);
     const livro = livroService.buscarPorId(id);
 
-    return res.status(200).json(livro || {});
+    return res.status(200).json(livro);
   } catch (erro) {
     return next(erro);
   }
@@ -46,7 +46,7 @@ function criar(req, res, next) {
 
     const novoLivro = livroService.criar(dados);
 
-    return res.status(200).json(novoLivro);
+    return res.status(201).json(novoLivro);
   } catch (erro) {
     return next(erro);
   }
