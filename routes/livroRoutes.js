@@ -16,13 +16,13 @@ router.get("/", livroController.listar);
 router.get("/:id", livroController.buscarPorId);
 
 // Resumo de um livro
-router.get(":id/resumo", livroController.buscarResumo);
+router.get("/resumo/:id", livroController.buscarResumo);
 
 // Cria um novo livro
 router.post("/", livroController.criar);
 
 // Atualiza um livro existente
-router.put("/:id", livroController.atualizar);
+router.patch("/:id", livroController.atualizar);
 
 // Remove livros
 router.delete("/:id", livroController.remover);

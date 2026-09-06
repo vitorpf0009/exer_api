@@ -1,7 +1,7 @@
 // controllers/livroController.js — Orquestração das requisições de Livros
 
 const livroService = require("../services/livroService");
-const livroDAO = require("../dao/livroDAO");
+
 
 // =============================================
 // Listar todos os livros
@@ -22,6 +22,13 @@ function buscarPorId(req, res, next) {
   try {
     const id = parseInt(req.params.id);
     const livro = livroService.buscarPorId(id);
+
+    if (!livro) {
+      return res.status(404).json({
+        sucesso: false,
+        mensagem: "Livro com id " + id + " não encontrado",
+      });
+    }
 
     return res.status(200).json(livro);
   } catch (erro) {
@@ -87,7 +94,7 @@ function remover(req, res, next) {
       return res.status(404).json({ mensagem: "Livro não encontrado." });
     }
 
-    return res.status(200).json({
+    return res.status(204).json({
       mensagem: "Livro removido com sucessoa.",
       livro: livroRemovido
     });
@@ -103,20 +110,16 @@ function remover(req, res, next) {
 function buscarResumo(req, res, next) {
   try {
     const id = parseInt(req.params.id);
-    const livro = livroService.buscarPorId(id);
+    const resumo = livroService.buscarResumo(id);
 
-    if (!livro) {
-      return res.status(404).send("Livro não encontrado");
+     if (!resumo) {
+      return res.status(404).json({
+        sucesso: false,
+        mensagem: "Livro com id " + id + " não encontrado",
+      });
     }
 
-    res.send(
-      "titulo: " +
-        livro.titulo +
-        ", autor: " +
-        livro.autor +
-        ", preco: " +
-        livro.preco
-    );
+    return res.status(200).json(resumo);
   } catch (erro) {
     return next(erro);
   }

@@ -49,6 +49,23 @@ function atualizar(id, dados) {
 }
 
 // =============================================
+// Buscar um resumo de um livro
+// =============================================
+function buscarResumo(id) {
+  const livro = livroDAO.buscarPorId(id);
+
+  if (!livro) {
+    return null;
+  }
+
+  return {
+    titulo: livro.titulo,
+    autor: livro.autor,
+    preco: livro.preco,
+  };
+}
+
+// =============================================
 // Remover um livro
 // =============================================
 function remover(id) {
@@ -66,5 +83,6 @@ module.exports = {
   buscarPorId: buscarPorId,
   criar: criar,
   atualizar: atualizar,
+  buscarResumo: buscarResumo,
   remover: remover,
 };
