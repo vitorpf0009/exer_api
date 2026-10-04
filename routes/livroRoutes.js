@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 const livroController = require("../controllers/livroController");
+const { authenticateToken } = require("../middlewares/authMiddleware");
 
 // =============================================
 // Definição das Rotas
@@ -17,6 +18,9 @@ router.get("/:id", livroController.buscarPorId);
 
 // Resumo de um livro
 router.get("/resumo/:id", livroController.buscarResumo);
+
+// Todas as rotas abaixo exigem autenticação
+router.use(authenticateToken);
 
 // Cria um novo livro
 router.post("/", livroController.criar);

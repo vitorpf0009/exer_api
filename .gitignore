@@ -2,3 +2,5 @@ package-lock.json
 .gitignore
 node_modules/
 package.json 
+node_modules
+.env
